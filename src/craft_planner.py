@@ -89,7 +89,6 @@ def make_goal_checker(goal):
 
     def is_goal(state):
         # This code is used in the search process and may be called millions of times.
-
         for item, value in goal.items():
             if state[item] < value:
                 return False
@@ -113,10 +112,10 @@ def heuristic(state):
 
     # From hint: If we already have a tool, we don't need to make another one.
     # Or if we have plenty of a material, we don't need any more.
-    # This works as long as the goal isn't to build more than 1 tool or to acquire more material than specified by the heuristic
+    # This works as long as the goal isn't to build more than 1 tool of a tool or to acquire more material than specified by the heuristic
 
     tools = ['furnace', 'bench', 'wooden_pickaxe', 'wooden_axe', 'stone_pickaxe', 'stone_axe', 'iron_pickaxe', 'iron_axe']
-    materials_with_heuristic_value = {
+    materials_with_heuristic_value = {  # value based on recipe that uses the most of that specific material (eg. furnace requires 8 cobble so we'll likely never need more than 8 at one time)
         'coal':   1,
         'cobble': 8,
         'wood':   1,
@@ -146,17 +145,13 @@ def search(graph, state, is_goal, limit, heuristic):
     # in the path and the action that took you to this state
 
     queue = [(0, state, None)]  # This is like the frontier from other assignments, but I don't think it's a frontier if the nodes don't represent a physical space
-
     cost = {state: 0}
-
     prev = {state: None}
-
     actions = {state: None}
-
     visited = [state]
-
     path = []
 
+    # A* implementation
     while time() - start_time < limit:
 
         current_cost, current_state, current_action = heappop(queue)
