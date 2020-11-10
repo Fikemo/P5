@@ -112,7 +112,6 @@ def heuristic(state):
 
     # From hint: If we already have a tool, we don't need to make another one.
     # Or if we have plenty of a material, we don't need any more.
-    # This works as long as the goal isn't to build more than 1 tool of a tool or to acquire more material than specified by the heuristic
 
     tools = ['furnace', 'bench', 'wooden_pickaxe', 'wooden_axe', 'stone_pickaxe', 'stone_axe', 'iron_pickaxe', 'iron_axe']
     materials_with_heuristic_value = {  # value based on recipe that uses the most of that specific material (eg. furnace requires 8 cobble so we'll likely never need more than 8 at one time)
@@ -126,14 +125,19 @@ def heuristic(state):
     }
 
     for tool in tools:
-        if state[tool] > 1:
+        if state[tool] > 1 and tool not in Crafting["Goal"].keys():
+            return inf
+        elif tool in Crafting["Goal"].keys() and state[tool] > Crafting["Goal"][tool]:
             return inf
 
     for material in materials_with_heuristic_value.keys():
-        if state[material] > materials_with_heuristic_value[material]:
+        if state[material] > materials_with_heuristic_value[material] and material not in Crafting["Goal"].keys():
+            return inf
+        elif material in Crafting["Goal"].keys() and state[material] > Crafting["Goal"][material]:
             return inf
 
     return 0
+
 
 def search(graph, state, is_goal, limit, heuristic):
 
@@ -148,10 +152,9 @@ def search(graph, state, is_goal, limit, heuristic):
     cost = {state: 0}
     prev = {state: None}
     actions = {state: None}
-    visited = [state]
     path = []
 
-    # A* implementation
+    # Basic A* implementation
     while time() - start_time < limit:
 
         current_cost, current_state, current_action = heappop(queue)
@@ -164,12 +167,11 @@ def search(graph, state, is_goal, limit, heuristic):
                 current_back_node = prev[current_back_node]
             break
 
-        for node_action, node_state, node_cost in graph(current_state):
+        for node_action, node_state, node_cost in graph(current_state):  # graph(current_state) returns all the available actions we can take from our current state. It's like the neighbors
             new_cost = current_cost + node_cost
-            if(node_state not in cost or new_cost < cost[node_state]) and node_state not in visited:
+            if node_state not in cost or new_cost < cost[node_state]:
                 cost[node_state] = new_cost
                 actions[node_state] = node_action
-                visited.append(node_state)
                 priority = new_cost + heuristic(node_state)
                 heappush(queue, (priority, node_state, node_action))
                 prev[node_state] = current_state
@@ -177,6 +179,9 @@ def search(graph, state, is_goal, limit, heuristic):
     # Failed to find a path
     print(time() - start_time, 'seconds.')
     if path:
+        print("cost " + str(current_cost))
+        print("len " + str(len(path)-1))
+
         return path
     print("Failed to find a path from", state, 'within time limit.')
     return None
