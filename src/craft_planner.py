@@ -125,15 +125,20 @@ def heuristic(state):
     }
 
     for tool in tools:
-        if state[tool] > 1 and tool not in Crafting["Goal"].keys():
-            return inf
-        elif tool in Crafting["Goal"].keys() and state[tool] > Crafting["Goal"][tool]:
+        if tool in Crafting["Goal"].keys():
+            upper_limit = max(Crafting["Goal"][tool], 1)
+            if state[tool] > upper_limit:
+                return inf
+
+        elif state[tool] > 1:
             return inf
 
     for material in materials_with_heuristic_value.keys():
-        if state[material] > materials_with_heuristic_value[material] and material not in Crafting["Goal"].keys():
-            return inf
-        elif material in Crafting["Goal"].keys() and state[material] > Crafting["Goal"][material]:
+        if material in Crafting["Goal"].keys():
+            upper_limit = max(Crafting["Goal"][material], materials_with_heuristic_value[material])
+            if state[material] > upper_limit:
+                return inf
+        elif state[material] > materials_with_heuristic_value[material]:
             return inf
 
     return 0
@@ -181,6 +186,8 @@ def search(graph, state, is_goal, limit, heuristic):
     if path:
         print("cost " + str(current_cost))
         print("len " + str(len(path)-1))
+        # for p in path:
+        #     print(p[1])
 
         return path
     print("Failed to find a path from", state, 'within time limit.')

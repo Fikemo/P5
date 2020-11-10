@@ -1,0 +1,96 @@
+Initial = {}
+Goal = {
+   "cart": 1,
+   "iron_axe": 1,
+   "iron_pickaxe": 2,
+   "stone_axe": 2
+ }
+
+25.827844 seconds.
+
+Game time cost: 186
+# of steps: 81
+
+Path:
+None
+punch for wood
+craft plank
+craft stick
+punch for wood
+craft plank
+craft bench
+punch for wood
+craft plank
+craft wooden_pickaxe at bench
+wooden_pickaxe for cobble
+wooden_pickaxe for cobble
+wooden_pickaxe for cobble
+craft stone_pickaxe at bench
+stone_pickaxe for cobble
+stone_pickaxe for cobble
+stone_pickaxe for cobble
+stone_pickaxe for cobble
+stone_pickaxe for cobble
+stone_pickaxe for cobble
+stone_pickaxe for cobble
+stone_pickaxe for cobble
+craft furnace at bench
+craft stick
+stone_pickaxe for coal
+stone_pickaxe for ore
+smelt ore in furnace
+stone_pickaxe for coal
+stone_pickaxe for ore
+smelt ore in furnace
+stone_pickaxe for coal
+stone_pickaxe for ore
+smelt ore in furnace
+craft iron_pickaxe at bench
+iron_pickaxe for cobble
+iron_pickaxe for cobble
+iron_pickaxe for cobble
+craft stone_axe at bench
+stone_axe for wood
+craft plank
+craft stick
+iron_pickaxe for cobble
+iron_pickaxe for cobble
+iron_pickaxe for cobble
+craft stone_axe at bench
+iron_pickaxe for coal
+iron_pickaxe for ore
+smelt ore in furnace
+iron_pickaxe for coal
+iron_pickaxe for ore
+smelt ore in furnace
+iron_pickaxe for coal
+iron_pickaxe for ore
+smelt ore in furnace
+craft iron_pickaxe at bench
+craft stick
+iron_pickaxe for coal
+iron_pickaxe for ore
+smelt ore in furnace
+iron_pickaxe for coal
+iron_pickaxe for ore
+smelt ore in furnace
+iron_pickaxe for coal
+iron_pickaxe for ore
+smelt ore in furnace
+craft iron_axe at bench
+iron_pickaxe for coal
+iron_pickaxe for ore
+smelt ore in furnace
+iron_pickaxe for coal
+iron_pickaxe for ore
+smelt ore in furnace
+iron_pickaxe for coal
+iron_pickaxe for ore
+smelt ore in furnace
+iron_pickaxe for coal
+iron_pickaxe for ore
+smelt ore in furnace
+iron_pickaxe for coal
+iron_pickaxe for ore
+smelt ore in furnace
+craft cart at bench
