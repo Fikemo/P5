@@ -3,7 +3,8 @@
  "Goal": {
    "cart": 1,
    "iron_axe": 1,
-   "iron_pickaxe": 2
+   "iron_pickaxe": 2,
+   "stone_axe": 2
  },
  "Items": [
    "bench",

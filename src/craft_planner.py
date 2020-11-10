@@ -121,7 +121,7 @@ def heuristic(state):
         'plank':  8,
         'stick':  4,
         'ore':    1,
-        'ingot':  6,
+        'ingot':  6
     }
 
     for tool in tools:
